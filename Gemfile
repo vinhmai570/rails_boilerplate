@@ -29,6 +29,10 @@ gem 'jbuilder'
 
 gem 'dotenv-rails'
 
+gem 'draper'
+gem 'active_decorator'
+
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 
