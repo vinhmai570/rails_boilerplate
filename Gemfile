@@ -51,6 +51,10 @@ gem "bootsnap", require: false
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem 'rubocop', require: false # A Ruby static code analyzer and formatter, based on the community Ruby style guide.
+  gem 'rubocop-rails', require: false # A RuboCop extension focused on enforcing Rails best practices and coding conventions.
+  gem 'rubocop-rspec', require: false # Code style checking for RSpec files
+  gem 'rubocop-performance', require: false # An extension of RuboCop focused on code performance checks.
 end
 
 group :development do
