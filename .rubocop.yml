@@ -20,15 +20,20 @@ AllCops:
 Style/Documentation:
   Enabled: false
 
+Style/ClassAndModuleChildren:
+  Enabled: false
+
 Layout/LineLength:
   Max: 120
   Exclude:
     - 'spec/**/*'
     - 'config/**/*'
 
+Layout/HashAlignment:
+  Enabled: false
+
 Metrics/BlockLength:
-  Exclude:
-    - 'spec/**/*'
+  Enabled: false
 
 Style/FormatStringToken:
   EnforcedStyle: template
