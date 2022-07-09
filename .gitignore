@@ -31,6 +31,10 @@
 /config/master.key
 /config/database.yml
 
+# dotenv
+.env
+.env.*.local
+
 ## OS generated files ##
 .DS_Store
 .DS_Store?
