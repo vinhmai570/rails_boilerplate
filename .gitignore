@@ -29,11 +29,11 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
-/config/database.yml
 
 # dotenv
-.env
 .env.*.local
+.env.staging
+.env.production
 
 ## OS generated files ##
 .DS_Store
@@ -45,3 +45,4 @@
 !/app/assets/builds/.keep
 
 /node_modules
+*.log
