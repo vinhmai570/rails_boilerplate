@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     postgresql-client \
     git \
     nodejs \
+    imagemagick \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install yarn

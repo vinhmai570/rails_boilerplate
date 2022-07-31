@@ -54,7 +54,13 @@ gem 'rspec-rails', '~> 6.0.0.rc1'
 gem 'factory_bot_rails'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem 'image_processing', '~> 1.2'
+gem 'image_processing', '~> 1.2'
+
+# AWS S3 for files storage
+gem 'aws-sdk-s3', require: false
+
+# Validate upload files
+gem 'active_storage_validations'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
