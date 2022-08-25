@@ -69,6 +69,14 @@ group :development, :test do
   gem 'rubocop-rails', require: false # A RuboCop extension focused on enforcing Rails best practices and coding conventions.
   gem 'rubocop-rspec', require: false # Code style checking for RSpec files
   gem 'rubocop-performance', require: false # An extension of RuboCop focused on code performance checks.
+
+  gem 'capistrano', '~> 3.17', require: false
+  gem 'capistrano-rails', '~> 1.6', '>= 1.6.2', require: false
+  gem 'capistrano-rbenv'
+  gem 'capistrano-bundler', '~> 2.1', require: false
+  gem 'capistrano3-puma', require: false
+  gem 'capistrano-sidekiq', require: false
+  gem 'capistrano-yarn', require: false
 end
 
 group :development do

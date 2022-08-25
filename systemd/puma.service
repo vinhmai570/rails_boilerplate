@@ -1,0 +1,26 @@
+[Unit]
+Description=Puma HTTP Server for rails_boilerplate (production)
+After=network.target
+
+
+[Service]
+Type=simple
+User=rails
+WorkingDirectory=/data/rails_boilerplate/current
+# Support older bundler versions where file descriptors weren't kept
+# See https://github.com/rubygems/rubygems/issues/3254
+ExecStart=/home/rails/.rbenv/bin/rbenv exec bundle exec --keep-file-descriptors puma -C /data/rails_boilerplate/shared/config/puma/production.rb
+ExecReload=/bin/kill -USR1 $MAINPID
+StandardOutput=append:/data/rails_boilerplate/shared/log/puma_access.log
+StandardError=append:/data/rails_boilerplate/shared/log/puma_error.log
+
+
+
+
+Restart=always
+RestartSec=1
+
+SyslogIdentifier=puma
+
+[Install]
+WantedBy=multi-user.target
