@@ -32,7 +32,7 @@ services:
 
   postgresql:
     image: postgres:14
-    restart: always
+    restart: on-failure
     container_name: postgresql
     volumes:
       # Mount the DB dumps folder into the container, to be able to create & access database dumps:
