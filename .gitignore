@@ -32,6 +32,7 @@
 
 # dotenv
 .env.*.local
+.env.development
 .env.staging
 .env.production
 
@@ -46,3 +47,5 @@
 
 /node_modules
 *.log
+
+/config/credentials/production.key
