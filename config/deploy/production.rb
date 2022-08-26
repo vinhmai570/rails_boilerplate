@@ -4,7 +4,7 @@ set :stage, :production
 set :server, '34.212.174.120'
 set :user, 'rails'
 
-server '34.212.174.120', user: 'rails', roles: %w[app db web]
+server '54.203.144.219', user: 'rails', roles: %w[app db web]
 
 set :rbenv_ruby, File.read('.ruby-version').strip
 
@@ -12,8 +12,8 @@ set :application, 'rails_boilerplate'
 set :repo_url, 'git@github.com-per:vinhmai570/rails_boilerplate.git'
 
 # Default branch is :master
-set :branch, 'master'
-set :deploy_to, '/data/rails_boilerplate'
+set :branch, 'demo'
+set :deploy_to, '/data/demo'
 
 # role-based syntax
 # ==================

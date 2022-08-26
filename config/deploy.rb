@@ -16,7 +16,7 @@ set :pty, false
 set :linked_files, ['config/master.key', ".env.#{fetch(:stage)}"]
 
 # Default value for linked_dirs is []
-set :linked_dirs, ['log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'bundle', 'config/puma', 'node_modules', 'public/uploads']
+set :linked_dirs, ['log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'bundle', 'config/puma', 'node_modules']
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
@@ -46,7 +46,6 @@ namespace :deploy do
       upload!("config/puma/#{fetch(:stage)}.rb", "#{shared_path}/config/puma/#{fetch(:stage)}.rb")
       upload!(".env.#{fetch(:stage)}", "#{shared_path}/.env.#{fetch(:stage)}")
       upload!('config/master.key', "#{shared_path}/config/master.key")
-      upload!('config/nginx/nginx.conf', "/etc/nginx/sites-available/rails_boilerplate")
     end
   end
 
