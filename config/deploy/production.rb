@@ -13,7 +13,7 @@ set :repo_url, 'git@github.com-per:vinhmai570/rails_boilerplate.git'
 
 # Default branch is :master
 set :branch, 'demo'
-set :deploy_to, '/data/demo'
+set :deploy_to, '/data/rails_boilerplate'
 
 # role-based syntax
 # ==================
