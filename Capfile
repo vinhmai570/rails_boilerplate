@@ -13,6 +13,7 @@ require 'capistrano/rails/assets'
 require 'capistrano/puma'
 install_plugin Capistrano::Puma
 install_plugin Capistrano::Puma::Systemd
+install_plugin Capistrano::Puma::Nginx
 # require 'seed-fu/capistrano3'
 require "capistrano/scm/git"
 install_plugin Capistrano::SCM::Git
