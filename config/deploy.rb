@@ -46,26 +46,10 @@ namespace :deploy do
       upload!("config/puma/#{fetch(:stage)}.rb", "#{shared_path}/config/puma/#{fetch(:stage)}.rb")
       upload!(".env.#{fetch(:stage)}", "#{shared_path}/.env.#{fetch(:stage)}")
       upload!('config/master.key', "#{shared_path}/config/master.key")
-      upload!('config/nginx/nginx.conf', "/etc/nginx/sites-available/rails_boilerplate")
     end
   end
 
   before :deploy, 'deploy:upload_yml'
-end
-
-namespace :maintenance do
-  task :on do
-    on roles(:app) do
-      # invoke 'puma:stop'
-      execute "cd #{shared_path}/public && touch maintenance"
-    end
-  end
-
-  task :off do
-    on roles(:app) do
-      execute "cd #{shared_path}/public && rm -rf maintenance"
-    end
-  end
 end
 
 namespace :db do
@@ -97,4 +81,3 @@ task :log do
     execute "cd #{shared_path}/log && tail -f #{fetch(:stage)}.log"
   end
 end
-
