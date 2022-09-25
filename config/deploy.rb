@@ -25,6 +25,8 @@ set :keep_releases, 3
 set :local_user, 'rails'
 set :use_sudo, false
 
+set :slack_url, 'your_slack_hook_url'
+
 namespace :yarn do
   desc 'Run rake yarn install'
   task :install do
@@ -37,7 +39,7 @@ namespace :yarn do
 end
 
 namespace :deploy do
-  desc 'Upload yml file.'
+  desc 'Upload config file.'
   task :upload_yml do
     on roles(:app) do
       execute "mkdir -p #{shared_path}/public"
@@ -53,6 +55,16 @@ namespace :deploy do
 end
 
 namespace :db do
+  task :setup do
+    on roles(:app) do
+      within current_path do
+        with(rails_env: fetch(:stage)) do
+          execute :bundle, :exec, :rake, 'db:setup'
+        end
+      end
+    end
+  end
+
   desc 'Seed the database.'
   task :seed do
     on roles(:app) do
