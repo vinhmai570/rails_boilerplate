@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-git_source(:github) { |repo| 'https://github.com/#{repo}.git' }
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.1.2'
 
@@ -39,7 +39,7 @@ gem 'redis', '~> 4.7', '>= 4.7.1', require: ['redis', 'redis/connection/hiredis'
 gem 'redis-namespace', '~> 1.8', '>= 1.8.2'
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[ mingw mswin x64_mingw jruby ]
@@ -63,6 +63,14 @@ gem 'aws-sdk-s3', require: false
 gem 'active_storage_validations'
 
 gem 'capistrano-slackify', require: false
+
+gem 'administration-zero', '~> 0.0.17'
+# Use Pagy to add paginated results [https://github.com/ddnexus/pagy]
+gem 'pagy'
+# Use Ransack to enable the creation of search forms for your application [https://github.com/activerecord-hackery/ransack]
+gem 'ransack'
+# Spreadsheet Architect is a library that allows you to create XLSX, ODS, or CSV spreadsheets super easily [https://github.com/westonganger/spreadsheet_architect]
+gem 'spreadsheet_architect'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

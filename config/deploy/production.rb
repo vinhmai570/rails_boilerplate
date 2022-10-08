@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 set :stage, :production
-set :server, '34.212.174.120'
+set :server, '18.237.167.255'
 set :user, 'rails'
 
-server '34.212.174.120', user: 'rails', roles: %w[app db web]
+server '18.237.167.255', user: 'rails', roles: %w[app db web]
 
 set :rbenv_ruby, File.read('.ruby-version').strip
 

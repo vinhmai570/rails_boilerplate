@@ -19,7 +19,7 @@ services:
     container_name: app
     ports:
       - "3333:3000"
-    restart: on-failure
+    restart: 'no'
     command: start.sh
     volumes:
       - .:/var/www/html
@@ -32,7 +32,7 @@ services:
 
   postgresql:
     image: postgres:14
-    restart: on-failure
+    restart: 'no'
     container_name: postgresql
     volumes:
       # Mount the DB dumps folder into the container, to be able to create & access database dumps:
@@ -67,11 +67,11 @@ services:
       - "5050:80"
     networks:
       - dev-network
-    restart: on-failure
+    restart: 'no'
   redis:
     image: redis
     container_name: redis
-    restart: on-failure
+    restart: 'no'
     ports:
       - "6378:6379"
     networks:

@@ -79,6 +79,7 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
+    administration-zero (0.0.17)
     airbrussh (1.4.1)
       sshkit (>= 1.6.1, != 1.7.0)
     annotate (3.2.0)
@@ -101,6 +102,10 @@ GEM
       aws-sigv4 (~> 1.4)
     aws-sigv4 (1.5.1)
       aws-eventstream (~> 1, >= 1.0.2)
+    axlsx_styler (1.1.0)
+      activesupport (>= 3.1)
+      caxlsx (>= 2.0.2)
+    bcrypt (3.1.18)
     bindex (0.8.1)
     bootsnap (1.12.0)
       msgpack (~> 1.2)
@@ -141,6 +146,11 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
+    caxlsx (3.2.0)
+      htmlentities (~> 4.3, >= 4.3.4)
+      marcel (~> 1.0)
+      nokogiri (~> 1.10, >= 1.10.4)
+      rubyzip (>= 1.3.0, < 3)
     childprocess (4.1.0)
     code_analyzer (0.5.5)
       sexp_processor
@@ -174,6 +184,7 @@ GEM
     globalid (1.0.0)
       activesupport (>= 5.0)
     hiredis (0.6.3)
+    htmlentities (4.3.4)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     image_processing (1.12.2)
@@ -228,6 +239,8 @@ GEM
       racc (~> 1.4)
     nokogiri (1.13.6-x86_64-linux)
       racc (~> 1.4)
+    pagy (5.10.1)
+      activesupport
     parallel (1.22.1)
     parser (3.1.2.0)
       ast (~> 2.4.1)
@@ -275,6 +288,10 @@ GEM
       zeitwerk (~> 2.5)
     rainbow (3.1.1)
     rake (13.0.6)
+    ransack (3.2.1)
+      activerecord (>= 6.1.5)
+      activesupport (>= 6.1.5)
+      i18n
     redis (4.7.1)
     redis-namespace (1.8.2)
       redis (>= 3.0.4)
@@ -285,6 +302,9 @@ GEM
       rack (>= 1.4)
     require_all (3.0.0)
     rexml (3.2.5)
+    rodf (1.2.0)
+      builder (>= 3.0)
+      rubyzip (>= 1.0)
     rspec-core (3.11.0)
       rspec-support (~> 3.11.0)
     rspec-expectations (3.11.0)
@@ -338,6 +358,10 @@ GEM
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.2.0)
+    spreadsheet_architect (4.2.0)
+      axlsx_styler (>= 1.0.0, < 2)
+      caxlsx (>= 2.0.2, < 4)
+      rodf (>= 1.0.0, < 2)
     sprockets (4.1.1)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
@@ -385,8 +409,10 @@ PLATFORMS
 DEPENDENCIES
   active_decorator
   active_storage_validations
+  administration-zero (~> 0.0.17)
   annotate
   aws-sdk-s3
+  bcrypt (~> 3.1.7)
   bootsnap
   brakeman
   capistrano (~> 3.17)
@@ -407,10 +433,12 @@ DEPENDENCIES
   jbuilder
   jsbundling-rails
   letter_opener
+  pagy
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.3)
   rails_best_practices
+  ransack
   redis (~> 4.7, >= 4.7.1)
   redis-namespace (~> 1.8, >= 1.8.2)
   rspec-rails (~> 6.0.0.rc1)
@@ -420,6 +448,7 @@ DEPENDENCIES
   rubocop-rspec
   selenium-webdriver
   sidekiq (~> 6.5, >= 6.5.1)
+  spreadsheet_architect
   sprockets-rails
   stimulus-rails
   turbo-rails
