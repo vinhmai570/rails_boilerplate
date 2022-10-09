@@ -1,6 +1,5 @@
-import '@hotwired/turbo-rails'
-import { Turbo } from '@hotwired/turbo-rails'
-import './controllers'
-import * as bootstrap from 'bootstrap'
+import "@hotwired/turbo-rails"
+import { Turbo } from "@hotwired/turbo-rails"
+import "./controllers"
 
 Turbo.start()
