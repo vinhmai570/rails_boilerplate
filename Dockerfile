@@ -3,13 +3,15 @@ FROM ruby:3.1.2
 RUN apt-get update && apt-get install -y --no-install-recommends \
     vim \
     curl \
-    build-essential \
     libpq-dev \
+    build-essential \
     postgresql-client \
     git \
-    nodejs \
     imagemagick \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - &&\
+    apt install -y nodejs
 
 # Install yarn
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg -o /root/yarn-pubkey.gpg && apt-key add /root/yarn-pubkey.gpg

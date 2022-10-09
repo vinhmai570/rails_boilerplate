@@ -10,6 +10,7 @@
     <%= csp_meta_tag %>
 
     <%= render "stylesheet_link_tags" %>
+    <%= javascript_include_tag "admin", "data-turbo-track": "reload", defer: true %>
   </head>
 
   <body>
@@ -24,6 +25,5 @@
     </div>
 
     <%= render "flash_messages" %>
-    <%= render "javascript_tags" %>
   </body>
 </html>
