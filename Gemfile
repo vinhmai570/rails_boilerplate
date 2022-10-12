@@ -104,3 +104,15 @@ group :test do
   gem 'selenium-webdriver'
   gem 'webdrivers'
 end
+
+gem "administration-zero", "~> 0.0.17"
+# Use Pagy to add paginated results [https://github.com/ddnexus/pagy]
+gem "pagy"
+# Use Ransack to enable the creation of search forms for your application [https://github.com/activerecord-hackery/ransack]
+gem "ransack"
+# Spreadsheet Architect is a library that allows you to create XLSX, ODS, or CSV spreadsheets super easily [https://github.com/westonganger/spreadsheet_architect]
+gem "spreadsheet_architect"
+
+gem "bcrypt", "~> 3.1"
+
+gem "cssbundling-rails", "~> 1.1"

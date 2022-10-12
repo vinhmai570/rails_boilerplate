@@ -1,0 +1,29 @@
+<!-- Tabler Core -->
+<script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta11/dist/js/tabler.min.js"></script>
+
+<!-- Time zone cookie -->
+<script type="module">
+  import cookies from "https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.mjs"
+  const { timeZone } = new Intl.DateTimeFormat().resolvedOptions()
+  cookies.set("time_zone", timeZone, { expires: 365 })
+</script>
+
+<!-- Data confirm -->
+<script type="module">
+  document.addEventListener("click", (event) => {
+    if (!event.target.matches("[data-confirm]")) return
+    if (!window.confirm(event.target.dataset["confirm"])) event.preventDefault()
+  })
+</script>
+
+<!-- Stimulus controllers -->
+<script type="module">
+  import { Application, Controller } from "https://cdn.jsdelivr.net/npm/@hotwired/stimulus@3.1.0/dist/stimulus.min.js"
+  window.Stimulus = Application.start()
+
+  Stimulus.register("flash-message", class extends Controller {
+    connect() {
+      new bootstrap.Toast(this.element).show()
+    }
+  })
+</script>
