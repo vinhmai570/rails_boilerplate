@@ -1,7 +1,7 @@
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
   connect() {
-    console.log('Flash message controller')
+    new bootstrap.Toast(this.element).show()
   }
 }
