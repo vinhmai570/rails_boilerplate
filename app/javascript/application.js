@@ -1,8 +1,6 @@
 import '@hotwired/turbo-rails'
 import { Turbo } from '@hotwired/turbo-rails'
+import '@tabler/core/src/js/tabler'
 import './controllers'
-import * as bootstrap from 'bootstrap'
-
-window.bootstrap = bootstrap
 
 Turbo.start()
