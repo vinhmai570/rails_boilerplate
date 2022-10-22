@@ -16,6 +16,7 @@ services:
     build:
       context: .
     tty: true
+    stdin_open: true
     container_name: app
     ports:
       - "3333:3000"

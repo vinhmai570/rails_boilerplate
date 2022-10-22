@@ -9,7 +9,8 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= render "stylesheet_link_tags" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
 
   <body class="border-top-wide border-primary d-flex flex-column">
@@ -17,8 +18,8 @@
       <div class="page page-center">
         <div class="container-tight py-4">
           <div class="text-center mb-4">
-            <%= link_to admin_sign_in_path, class: "navbar-brand navbar-brand-autodark" do %>
-              <%= image_tag "admin/logo.svg", height: 36 %>
+            <%= link_to new_admin_session_path, class: 'navbar-brand navbar-brand-autodark' do %>
+              <%= image_tag 'admin/logo.svg', height: 36 %>
             <% end %>
           </div>
           <%= yield %>
@@ -26,7 +27,6 @@
       </div>
     </div>
 
-    <%= render "flash_messages" %>
-    <%= render "javascript_tags" %>
+    <%= render 'admins/base/flash_messages' %>
   </body>
 </html>

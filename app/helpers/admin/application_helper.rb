@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 module Admin::ApplicationHelper
   include Pagy::Frontend
 
   def title
-    content_for(:title) || Rails.application.class.to_s.split("::").first
+    content_for(:title) || Rails.application.class.to_s.split('::').first
   end
 
-  def active_nav_item(controller, actions = %w( index show new edit create update))
-    "active" if active_actions?(controller, actions)
+  def active_nav_item(controller, actions = %w[index show new edit create update])
+    'active' if active_actions?(controller, actions)
   end
 
   def np(number, options = {})
@@ -21,10 +23,11 @@ module Admin::ApplicationHelper
     super(object, **options) if object
   end
 
-  alias :l :localize
+  alias l localize
 
   private
-    def active_actions?(controller, actions)
-      params[:controller].include?(controller) && actions.include?(params[:action])
-    end
+
+  def active_actions?(controller, actions)
+    params[:controller].include?(controller) && actions.include?(params[:action])
+  end
 end

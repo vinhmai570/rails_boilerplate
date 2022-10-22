@@ -1,6 +1,6 @@
 import '@hotwired/turbo-rails'
 import { Turbo } from '@hotwired/turbo-rails'
-import '@tabler/core/src/js/tabler'
+import './lib/tabler.min'
 import './controllers'
 
 Turbo.start()
