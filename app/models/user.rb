@@ -41,12 +41,14 @@
 class User < ApplicationRecord
   include SpreadsheetArchitect
 
+  validates :first_name, :last_name, length: { minimum: 2 }
+
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockab le, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable
+
   def spreadsheet_columns
     %i[id email first_name last_name phone address zipcode]
   end
-
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
 end

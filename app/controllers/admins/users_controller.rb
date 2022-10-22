@@ -40,7 +40,7 @@ class Admins::UsersController < Admins::BaseController
 
   def destroy
     @user.destroy
-    redirect_to admins_users_url, notice: 'User was successfully destroyed.'
+    redirect_to admins_users_url, status: :see_other, notice: 'User was successfully destroyed.'
   end
 
   private
