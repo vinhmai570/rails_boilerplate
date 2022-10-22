@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Load DSL and set up stages
 require 'capistrano/setup'
 
@@ -17,7 +19,7 @@ install_plugin Capistrano::Puma::Nginx
 # require 'seed-fu/capistrano3'
 require 'capistrano/scm/git'
 install_plugin Capistrano::SCM::Git
-require 'capistrano/slackify'
+# require 'capistrano/slackify' # gem for notification to slack
 
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined
 Dir.glob('lib/capistrano/tasks/*.rake').each { |r| import r }

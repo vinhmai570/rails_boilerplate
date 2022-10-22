@@ -8,6 +8,10 @@ Bundler.require(*Rails.groups)
 
 module RailsBoilerplate
   class Application < Rails::Application
+    # Provides an HTML generator for displaying errors that come from Active Model
+    config.action_view.field_error_proc = Proc.new do |html_tag, instance|
+      raw Nokogiri::HTML.fragment(html_tag).child.add_class("is-invalid")
+    end
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 

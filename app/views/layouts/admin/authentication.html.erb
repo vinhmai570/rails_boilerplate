@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head lang="en">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>Authentication Zero</title>
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+  </head>
+
+  <body class="border-top-wide border-primary d-flex flex-column">
+    <div class="page page-center">
+      <div class="page page-center">
+        <div class="container-tight py-4">
+          <div class="text-center mb-4">
+            <%= link_to new_admin_session_path, class: 'navbar-brand navbar-brand-autodark' do %>
+              <%= image_tag 'admin/logo.svg', height: 36 %>
+            <% end %>
+          </div>
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'admins/base/flash_messages' %>
+  </body>
+</html>

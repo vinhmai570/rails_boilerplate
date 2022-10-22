@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
+  devise_for :users
+  devise_for :admins, controllers: {
+    sessions: 'admins/sessions'
+  }
+
+  namespace :admins do
+    get    '/',        to: 'home#index'
+    resources :users
+  end
   mount Sidekiq::Web => '/sidekiq'
 
   get 'home/index'
