@@ -46,5 +46,7 @@ rdbg -A
 ```
 
 ### Todo
+- [ ] Setup pages error
+- [ ] Add profile admin
 - [ ] Setup CI/CD
 - [ ] ...
