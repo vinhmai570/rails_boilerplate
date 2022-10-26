@@ -7,6 +7,12 @@ Rails.application.routes.draw do
   namespace :admins do
     get    '/',        to: 'home#index'
     resources :users
+    resources :profile, only: %i[index update] do
+      collection do
+        get 'password'
+        put 'update_password'
+      end
+    end
   end
   mount Sidekiq::Web => '/sidekiq'
 
