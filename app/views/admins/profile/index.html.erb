@@ -1,0 +1,61 @@
+<div class="page-header d-print-none">
+  <div class="container-xl">
+    <div class="row g-2 align-items-center">
+      <div class="col">
+        <h2 class="page-title">
+          Account Settings
+        </h2>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="page-body">
+  <div class="container-xl">
+    <div class="card">
+      <div class="row g-0">
+        <div class="col-3 d-none d-md-block border-end">
+          <div class="card-body">
+            <div class="list-group list-group-transparent">
+              <%= link_to 'My Profile', admins_profile_index_path, class: 'list-group-item list-group-item-action d-flex align-items-center active' %>
+              <%= link_to 'Update Password', password_admins_profile_index_path, class: 'list-group-item list-group-item-action d-flex align-items-center' %>
+            </div>
+          </div>
+        </div>
+        <div class="col d-flex flex-column">
+          <%= form_with(model: @admin, url: admins_profile_path(@admin.id)) do |f| %>
+            <div class="card-body">
+              <h2 class="mb-4">My Account</h2>
+              <div class="row align-items-center">
+                <div class="col-md">
+                  <%= f.label :avatar, class: 'form-label' %>
+                  <div class="col-auto"><span class="avatar avatar-xl admin-avatar" style="background-image: url(<%= f.object.avatar.url %>)"></span>
+                  </div>
+                  <%= f.file_field :avatar, class: 'form-control' %>
+                  <%= tag.div @admin.errors[:avatar].first, class: "invalid-feedback" %>
+                </div>
+              </div>
+              <h3 class="card-title mt-4">Profile</h3>
+              <div class="row g-3">
+                <div class="col-md">
+                  <%= f.label :name, class: 'form-label' %>
+                  <%= f.text_field :name, required: true, autocomplete: 'name', class: 'form-control' %>
+                  <%= tag.div @admin.errors[:name].first, class: "invalid-feedback" %>
+                </div>
+                <div class="col-md">
+                  <%= f.label :email, class: 'form-label' %>
+                  <%= f.text_field :email, required: true, autocomplete: 'email', class: 'form-control' %>
+                  <%= tag.div @admin.errors[:email].first, class: "invalid-feedback" %>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer bg-transparent mt-auto">
+              <div class="btn-list justify-content-end">
+                <%= f.submit 'Update', class: "btn btn-primary" %>
+              </div>
+            </div>
+            </div>
+          <% end %>
+      </div>
+    </div>
+  </div>
+</div>
