@@ -1,0 +1,171 @@
+name: Rails boilerplate CI/CD Pipeline
+
+# This workflow is triggered on pushes to the repository
+on: push
+
+env:
+  RUBY_VERSION: 3.1.2
+  NODE_VERSION: 18.8.0
+  PGHOST:       localhost
+  PGUSER:       postgres
+  RAILS_ENV:    test
+  REDIS_HOST:   localhost
+  REDIS_PORT:   6379
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    # Service containers to run with container-job
+    services:
+      # Label used to access the service container
+      postgres:
+        # Docker Hub image
+        image: postgres:11.5
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+      redis:
+        image: redis
+        ports: ['6379:6379']
+        options: --entrypoint redis-server
+
+    steps:
+
+      # Downloads a copy of the code in your repository before running CI tests
+      - uses: actions/checkout@v2
+
+      - name: Setup ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.RUBY_VERSION }}
+
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{env.NODE_VERSION}}
+
+      # Caching dependencies to speed up workflows
+      # For more information, see https://github.com/marketplace/actions/cache
+      - name: Cache vendor/bundle
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: rails-boilerplate-v1-dependencies-${{ hashFiles('Gemfile.lock') }}
+          restore-keys: rails-boilerplate-v1-dependencies-
+
+      # Note: It is not recommended to cache node_modules, as it can break across Node versions and won't work with npm ci
+      - name: Cache node_modules
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          restore-keys: yarn-packages-
+
+      # installation and build then run test
+      - name: Install yarn packages
+        run: yarn install
+
+      - name: Build test env
+        run: |
+          gem install bundler
+          bundle install --jobs=4 --retry=3 --path vendor/bundle
+          bundle exec rails db:create
+          bundle exec rails db:migrate
+
+      - name: Run backend test
+        id: rspec
+        run: bundle exec rspec
+        continue-on-error: true
+
+#      - name: Set message if code backend fail
+#        if: steps.rspec.outcome == 'failure'
+#        run: echo "be_failed_message=[NEWS] Some test in backend fail" >> $GITHUB_ENV
+
+#      - name: Notify to slack if code fail
+#        if: steps.rspec.outcome == 'failure' || steps.jest.outcome == 'failure'
+#        uses: rtCamp/action-slack-notify@v2
+#        env:
+#          SLACK_CHANNEL:  rails_boilerplate-bots
+#          SLACK_COLOR:    '#BD7532'
+#          SLACK_MESSAGE:  ${{ env.be_failed_message }} ${{ env.fe_failed_message }}
+#          SLACK_TITLE:    CI Message
+#          SLACK_USERNAME:  Github Action
+#          SLACK_WEBHOOK:  ${{ secrets.WEBHOOK }}
+
+      # Break CI pipeline when error occur
+      - name: Exit if fail
+        if: steps.rspec.outcome == 'failure' || steps.jest.outcome == 'failure'
+        run: exit 1
+
+#  cd:
+#    runs-on: ubuntu-latest
+#    needs: ci
+#    if: github.ref == 'refs/heads/develop' && success()
+#
+#    steps:
+#      - uses: actions/checkout@v2
+#
+#      - name: Setup Ruby
+#        uses: ruby/setup-ruby@v1
+#        with:
+#          ruby-version: ${{ env.RUBY_VERSION }}
+#
+#      - name: Setup file
+#        run: |
+#          cp config/database.yml.sample config/database.yml
+#          cp .env.staging.sample .env.staging
+#          echo ${{ secrets.MASTER_KEY }} > config/master.key
+#
+#      # scan all keyscan in github
+#      - name: Setup known_hosts
+#        run: |
+#          mkdir -p ~/.ssh
+#          ssh-keyscan github.com >> ~/.ssh/known_hosts
+#
+#      # More information. https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets#limits-for-secrets
+#      - name: Decrypt deploy_id_rsa_enc
+#        run: gpg --quiet --batch --yes --decrypt --passphrase=$PASSWORD --output config/deploy_id_rsa_enc deploy_id_rsa_enc.gpg
+#        env:
+#          PASSWORD: ${{secrets.PASSWORD}}
+#
+#      # Caching dependencies to speed up workflows
+#      - name: Cache vendor/bundle
+#        uses: actions/cache@v2
+#        with:
+#          path: vendor/bundle
+#          key: rails-boilerplate-v1-dependencies-${{ hashFiles('Gemfile.lock') }}
+#          restore-keys: rails-boilerplate-v1-dependencies-
+#
+#      - name: Bundle install
+#        run: bundle install --jobs=4 --retry=3 --path vendor/bundle
+#
+#      # More information, please visit here: https://github.com/marketplace/actions/capistrano-deploy
+#      - name: Cap staging deploy
+#        uses: miloserdow/capistrano-deploy@master
+#        with:
+#          target: staging
+#          deploy_key: ${{ secrets.PASSWORD }}
+#
+#      # Set message env for success or failure
+#      - if: success()
+#        run: echo "message=Congratulations on your successful release for staging :rocket:" >> $GITHUB_ENV
+#
+#      - if: failure()
+#        run: echo "message=Release staging failed, Please try again or release manually :uongtra:" >> $GITHUB_ENV
+#
+#      # Noti to slack for sucess or failure
+#      - name: Notify to slack
+#        if: always()
+#        uses: rtCamp/action-slack-notify@v2
+#        env:
+#          SLACK_CHANNEL:  rails_boilerplate-bots
+#          SLACK_COLOR:    '#32BD52'
+#          SLACK_MESSAGE:  ${{ env.message }}
+#          SLACK_TITLE:    CD Message
+#          SLACK_USERNAME: Rails boilerplate NEWS - Github Action
+#          SLACK_WEBHOOK:  ${{ secrets.WEBHOOK }}
