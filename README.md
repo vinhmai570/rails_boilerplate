@@ -15,7 +15,7 @@ This is a boilerplate for new rails app using:
 - Ruby 3.1.2
 - Rails 7.0.3
 - Node 16.x or higher
-- Postgresql
+- Postgresql 14.5
 - Redis
 
 ### Setup project
@@ -47,6 +47,6 @@ rdbg -A
 
 ### Todo
 - [ ] Setup pages error
-- [ ] Add profile admin
+- [x] Add profile admin
 - [ ] Setup CI/CD
 - [ ] ...
