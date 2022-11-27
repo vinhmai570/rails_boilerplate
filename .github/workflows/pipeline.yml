@@ -82,20 +82,27 @@ jobs:
         run: bundle exec rspec
         continue-on-error: true
 
-#      - name: Set message if code backend fail
-#        if: steps.rspec.outcome == 'failure'
-#        run: echo "be_failed_message=[NEWS] Some test in backend fail" >> $GITHUB_ENV
+      - name: Set message if success
+        if: steps.rspec.outcome == 'success'
+        run: echo "ci_message=Success" >> $GITHUB_ENV
+      - name: Set message if code backend fail
+        if: steps.rspec.outcome == 'failure'
+        run: echo "ci_message= Some test in backend fail" >> $GITHUB_ENV
 
-#      - name: Notify to slack if code fail
-#        if: steps.rspec.outcome == 'failure' || steps.jest.outcome == 'failure'
-#        uses: rtCamp/action-slack-notify@v2
-#        env:
-#          SLACK_CHANNEL:  rails_boilerplate-bots
-#          SLACK_COLOR:    '#BD7532'
-#          SLACK_MESSAGE:  ${{ env.be_failed_message }} ${{ env.fe_failed_message }}
-#          SLACK_TITLE:    CI Message
-#          SLACK_USERNAME:  Github Action
-#          SLACK_WEBHOOK:  ${{ secrets.WEBHOOK }}
+      - name: send telegram message on push
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            ${{ github.actor }} created commit:
+            Commit message: ${{ github.event.commits[0].message }}
+
+            CI state: ${{ env.ci_message }}
+
+            Repository: ${{ github.repository }}
+
+            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
 
       # Break CI pipeline when error occur
       - name: Exit if fail
@@ -125,12 +132,6 @@ jobs:
           mkdir -p ~/.ssh
           ssh-keyscan github.com >> ~/.ssh/known_hosts
 
-      # More information. https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets#limits-for-secrets
-#      - name: Decrypt deploy_id_rsa_enc
-#        run: gpg --quiet --batch --yes --decrypt --passphrase=$PASSWORD --output config/deploy_id_rsa_enc deploy_id_rsa_enc.gpg
-#        env:
-#          PASSWORD: ${{secrets.PASSWORD}}
-
       # Caching dependencies to speed up workflows
       - name: Cache vendor/bundle
         uses: actions/cache@v2
@@ -152,19 +153,23 @@ jobs:
 
       # Set message env for success or failure
       - if: success()
-        run: echo "message=Congratulations on your successful release for staging :rocket:" >> $GITHUB_ENV
+        run: echo "message=Congratulations on your successful release for staging" >> $GITHUB_ENV
 
       - if: failure()
-        run: echo "message=Release staging failed, Please try again or release manually :uongtra:" >> $GITHUB_ENV
+        run: echo "message=Deploy failed, Please try again or deploy manually" >> $GITHUB_ENV
 
-      # Noti to slack for sucess or failure
-#      - name: Notify to slack
-#        if: always()
-#        uses: rtCamp/action-slack-notify@v2
-#        env:
-#          SLACK_CHANNEL:  rails_boilerplate-bots
-#          SLACK_COLOR:    '#32BD52'
-#          SLACK_MESSAGE:  ${{ env.message }}
-#          SLACK_TITLE:    CD Message
-#          SLACK_USERNAME: Rails boilerplate NEWS - Github Action
-#          SLACK_WEBHOOK:  ${{ secrets.WEBHOOK }}
+      # Noti to slack for success or failure
+      - name: send telegram message on deploy
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            ${{ github.actor }} created commit:
+            Commit message: ${{ github.event.commits[0].message }}
+
+            Repository: ${{ github.repository }}
+
+            CD State: ${{ env.message }}
+
+            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
