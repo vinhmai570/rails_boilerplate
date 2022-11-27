@@ -48,5 +48,5 @@ rdbg -A
 ### Todo
 - [ ] Setup pages error
 - [x] Add profile admin
-- [ ] Setup CI/CD
+- [x] Setup CI/CD
 - [ ] ...
