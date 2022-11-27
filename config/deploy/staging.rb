@@ -1,13 +1,19 @@
-# server-based syntax
-# ======================
-# Defines a single server with a list of roles and multiple properties.
-# You can define all roles on a single server, or split them:
+# frozen_string_literal: true
 
-# server "example.com", user: "deploy", roles: %w{app db web}, my_property: :my_value
-# server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
-# server "db.example.com", user: "deploy", roles: %w{db}
+set :stage, :staging
+set :server, '152.70.197.189'
+set :user, 'rails'
 
+server '152.70.197.189', user: 'rails', roles: %w[app db web]
 
+set :rbenv_ruby, File.read('.ruby-version').strip
+
+set :application, 'rails_boilerplate'
+set :repo_url, 'git@github.com-per:vinhmai570/rails_boilerplate.git'
+
+# Default branch is :master
+set :branch, 'develop'
+set :deploy_to, '/data/rails_boilerplate'
 
 # role-based syntax
 # ==================
@@ -17,21 +23,25 @@
 # property set. Specify the username and a domain or IP for the server.
 # Don't use `:all`, it's a meta role.
 
-# role :app, %w{deploy@example.com}, my_property: :my_value
-# role :web, %w{user1@primary.com user2@additional.com}, other_property: :other_value
-# role :db,  %w{deploy@example.com}
+# capistrano-rails
+set :rails_env, :production
+set :migration_role, :web
 
+# capistrano/bundler
+set :bundle_binstubs, -> { shared_path.join('bin') }
+set :bundle_path, -> { shared_path.join('bundle') }
+set :bundle_without, %w[development test].join(' ')
+set :bundle_jobs, 4
+set :bundle_flags, '--deployment --quiet'
 
+# capistrano/puma
+set :puma_user, fetch(:user)
+set :puma_conf, -> { "#{shared_path}/config/puma/staging.rb" }
+set :puma_role, :web
+set :puma_workers, 2
 
-# Configuration
-# =============
-# You can set any configuration variable like in config/deploy.rb
-# These variables are then only loaded and set in this stage.
-# For available Capistrano configuration variables see the documentation page.
-# http://capistranorb.com/documentation/getting-started/configuration/
-# Feel free to add new variables to customise your setup.
-
-
+# capistrano/sidekiq
+set :sidekiq_config, 'config/sidekiq.yml'
 
 # Custom SSH Options
 # ==================
@@ -41,21 +51,6 @@
 #
 # Global options
 # --------------
-#  set :ssh_options, {
-#    keys: %w(/home/user_name/.ssh/id_rsa),
-#    forward_agent: false,
-#    auth_methods: %w(password)
-#  }
-#
-# The server-based syntax can be used to override options:
-# ------------------------------------
-# server "example.com",
-#   user: "user_name",
-#   roles: %w{web app},
-#   ssh_options: {
-#     user: "user_name", # overrides user setting above
-#     keys: %w(/home/user_name/.ssh/id_rsa),
-#     forward_agent: false,
-#     auth_methods: %w(publickey password)
-#     # password: "please use keys"
-#   }
+set :ssh_options, {
+  forward_agent: true
+}

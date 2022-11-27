@@ -102,63 +102,62 @@ jobs:
         if: steps.rspec.outcome == 'failure' || steps.jest.outcome == 'failure'
         run: exit 1
 
-#  cd:
-#    runs-on: ubuntu-latest
-#    needs: ci
-#    if: github.ref == 'refs/heads/develop' && success()
-#
-#    steps:
-#      - uses: actions/checkout@v2
-#
-#      - name: Setup Ruby
-#        uses: ruby/setup-ruby@v1
-#        with:
-#          ruby-version: ${{ env.RUBY_VERSION }}
-#
-#      - name: Setup file
-#        run: |
-#          cp config/database.yml.sample config/database.yml
-#          cp .env.staging.sample .env.staging
-#          echo ${{ secrets.MASTER_KEY }} > config/master.key
-#
-#      # scan all keyscan in github
-#      - name: Setup known_hosts
-#        run: |
-#          mkdir -p ~/.ssh
-#          ssh-keyscan github.com >> ~/.ssh/known_hosts
-#
-#      # More information. https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets#limits-for-secrets
+  cd:
+    runs-on: ubuntu-latest
+    needs: ci
+    if: github.ref == 'refs/heads/develop' && success()
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.RUBY_VERSION }}
+
+      - name: Setup file
+        run: |
+          echo ${{ secrets.MASTER_KEY }} > config/master.key
+
+      # scan all keyscan in github
+      - name: Setup known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+      # More information. https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets#limits-for-secrets
 #      - name: Decrypt deploy_id_rsa_enc
 #        run: gpg --quiet --batch --yes --decrypt --passphrase=$PASSWORD --output config/deploy_id_rsa_enc deploy_id_rsa_enc.gpg
 #        env:
 #          PASSWORD: ${{secrets.PASSWORD}}
-#
-#      # Caching dependencies to speed up workflows
-#      - name: Cache vendor/bundle
-#        uses: actions/cache@v2
-#        with:
-#          path: vendor/bundle
-#          key: rails-boilerplate-v1-dependencies-${{ hashFiles('Gemfile.lock') }}
-#          restore-keys: rails-boilerplate-v1-dependencies-
-#
-#      - name: Bundle install
-#        run: bundle install --jobs=4 --retry=3 --path vendor/bundle
-#
-#      # More information, please visit here: https://github.com/marketplace/actions/capistrano-deploy
-#      - name: Cap staging deploy
-#        uses: miloserdow/capistrano-deploy@master
-#        with:
-#          target: staging
-#          deploy_key: ${{ secrets.PASSWORD }}
-#
-#      # Set message env for success or failure
-#      - if: success()
-#        run: echo "message=Congratulations on your successful release for staging :rocket:" >> $GITHUB_ENV
-#
-#      - if: failure()
-#        run: echo "message=Release staging failed, Please try again or release manually :uongtra:" >> $GITHUB_ENV
-#
-#      # Noti to slack for sucess or failure
+
+      # Caching dependencies to speed up workflows
+      - name: Cache vendor/bundle
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: rails-boilerplate-v1-dependencies-${{ hashFiles('Gemfile.lock') }}
+          restore-keys: rails-boilerplate-v1-dependencies-
+
+      - name: Bundle install
+        run: bundle install --jobs=4 --retry=3 --path vendor/bundle
+
+      # More information, please visit here: https://github.com/marketplace/actions/capistrano-deploy
+      - name: Cap production deploy
+        uses: miloserdow/capistrano-deploy@master
+        with:
+          target: production
+          deploy_key: ${{ secrets.PASSWORD }}
+          enc_rsa_key_val: ${{ secrets.ENC_RSA_KEY_VAL }}
+
+      # Set message env for success or failure
+      - if: success()
+        run: echo "message=Congratulations on your successful release for staging :rocket:" >> $GITHUB_ENV
+
+      - if: failure()
+        run: echo "message=Release staging failed, Please try again or release manually :uongtra:" >> $GITHUB_ENV
+
+      # Noti to slack for sucess or failure
 #      - name: Notify to slack
 #        if: always()
 #        uses: rtCamp/action-slack-notify@v2
