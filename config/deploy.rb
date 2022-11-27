@@ -51,14 +51,14 @@ namespace :deploy do
     end
   end
 
-  before :deploy, 'deploy:upload_yml'
+  # before :deploy, 'deploy:upload_yml'
 end
 
 namespace :db do
   task :setup do
     on roles(:app) do
       within current_path do
-        with(rails_env: fetch(:stage)) do
+        with(rails_env: :production) do
           execute :bundle, :exec, :rake, 'db:setup'
         end
       end
@@ -69,7 +69,7 @@ namespace :db do
   task :seed do
     on roles(:app) do
       within current_path do
-        with(rails_env: fetch(:stage)) do
+        with(rails_env: :production) do
           execute :bundle, :exec, :rake, 'db:seed'
         end
       end
@@ -80,7 +80,7 @@ namespace :db do
   task :reset do
     on roles(:app) do
       within current_path do
-        with(rails_env: fetch(:stage)) do
+        with(rails_env: :production) do
           execute :bundle, :exec, :rake, 'db:drop db:create db:migrate'
         end
       end
