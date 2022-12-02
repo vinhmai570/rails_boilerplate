@@ -49,4 +49,5 @@ rdbg -A
 - [ ] Setup pages error
 - [x] Add profile admin
 - [x] Setup CI/CD
+- [ ] Seperate js file of admin and application
 - [ ] ...
