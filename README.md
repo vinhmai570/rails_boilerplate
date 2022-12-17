@@ -8,12 +8,13 @@ This is a boilerplate for new rails app using:
 - Sidekiq for background job
 - Active storage for image upload & image processing
 - Capistrano for deployment
+- Github CI for CI/CD
 - Tabler for admin interface
 - Up to date ...
 ## Get Started
 ### Environments
 - Ruby 3.1.2
-- Rails 7.0.3
+- Rails 7.0.4
 - Node 16.x or higher
 - Postgresql 14.5
 - Redis
