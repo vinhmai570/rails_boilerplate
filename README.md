@@ -44,10 +44,3 @@ rdbg -A
 # then type 'c' to continue breakpoint in debugger
 # we can run 'h' to get all command of ruby debug
 ```
-
-### Todo
-- [ ] Setup pages error
-- [x] Add profile admin
-- [x] Setup CI/CD
-- [ ] Seperate js file of admin and application
-- [ ] ...
