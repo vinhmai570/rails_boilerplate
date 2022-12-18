@@ -118,3 +118,5 @@ gem "bcrypt", "~> 3.1"
 gem "cssbundling-rails", "~> 1.1"
 
 gem "devise", "~> 4.8"
+
+gem "terser", "~> 1.1"
