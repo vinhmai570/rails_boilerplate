@@ -105,7 +105,6 @@ group :test do
   gem 'webdrivers'
 end
 
-gem "administration-zero", "~> 0.0.17"
 # Use Pagy to add paginated results [https://github.com/ddnexus/pagy]
 gem "pagy"
 # Use Ransack to enable the creation of search forms for your application [https://github.com/activerecord-hackery/ransack]

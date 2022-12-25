@@ -30,6 +30,16 @@ git clone git@github.com:vinhmai570/rails_boilerplate.git
 docker-compose up -d --build
 ```
 
+### Admins scaffold
+You can run command follow this pattern to generate admin scaffold
+```bash
+bin/rails generate admins:scaffold model field:type field:type
+```
+Example
+```
+bin/rails generate admins:scaffold posts title:string body:text published:boolean
+```
+
 ### Debugging
 This project using default debugger of Rails 7 - Ruby debug (https://github.com/ruby/debug) 
 with foreman.

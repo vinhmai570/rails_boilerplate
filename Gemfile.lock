@@ -79,7 +79,6 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
-    administration-zero (0.0.17)
     airbrussh (1.4.1)
       sshkit (>= 1.6.1, != 1.7.0)
     annotate (3.2.0)
@@ -423,7 +422,6 @@ PLATFORMS
 DEPENDENCIES
   active_decorator
   active_storage_validations
-  administration-zero (~> 0.0.17)
   annotate
   aws-sdk-s3
   bcrypt (~> 3.1)
