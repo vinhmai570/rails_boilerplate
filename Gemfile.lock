@@ -108,7 +108,7 @@ GEM
     bindex (0.8.1)
     bootsnap (1.15.0)
       msgpack (~> 1.2)
-    brakeman (5.2.3)
+    brakeman (5.4.0)
     builder (3.2.4)
     capistrano (3.17.1)
       airbrussh (>= 1.0.0)
