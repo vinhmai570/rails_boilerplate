@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Admins::BaseController < ApplicationController
+class Admin::BaseController < ApplicationController
   include Pagy::Backend
   layout 'admin/base'
 

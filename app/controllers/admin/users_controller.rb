@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Admins::UsersController < Admins::BaseController
+class Admin::UsersController < Admin::BaseController
   before_action :set_user, only: %i[show edit update destroy]
 
   def index
@@ -24,7 +24,7 @@ class Admins::UsersController < Admins::BaseController
     @user = User.new(user_params)
 
     if @user.save
-      redirect_to admins_users_path, notice: 'User was successfully created.'
+      redirect_to admin_users_path, notice: 'User was successfully created.'
     else
       render :new, status: :unprocessable_entity
     end
@@ -32,7 +32,7 @@ class Admins::UsersController < Admins::BaseController
 
   def update
     if @user.update(user_params)
-      redirect_to admins_users_path, notice: 'User was successfully updated.'
+      redirect_to admin_users_path, notice: 'User was successfully updated.'
     else
       render :edit, status: :unprocessable_entity
     end
@@ -40,7 +40,7 @@ class Admins::UsersController < Admins::BaseController
 
   def destroy
     @user.destroy
-    redirect_to admins_users_url, status: :see_other, notice: 'User was successfully destroyed.'
+    redirect_to admin_users_url, status: :see_other, notice: 'User was successfully destroyed.'
   end
 
   private

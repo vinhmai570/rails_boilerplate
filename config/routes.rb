@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
   devise_for :admins, controllers: {
-    sessions: 'admins/sessions'
+    sessions: 'admin/sessions'
   }
 
-  namespace :admins do
+  namespace :admin do
     get    '/',        to: 'home#index'
     resources :users
     resources :profile, only: %i[index update] do
