@@ -12,7 +12,7 @@ This is a boilerplate for new rails app using:
 - Tabler for admin interface
 - Up to date ...
 ### Demo: 
-You can go to http://152.70.197.189/admin/sign_in and login with account: `admin@gmail.com`, password: `Password9257@admin!!` to see the demo admin page
+You can go to http://152.70.197.189/admins/sign_in and login with account: `admin@gmail.com`, password: `Password9257@admin!!` to see the demo admin page
 ## Get Started
 ### Environments
 - Ruby 3.1.2
