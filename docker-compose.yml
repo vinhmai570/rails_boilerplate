@@ -25,9 +25,10 @@ services:
     volumes:
       - .:/var/www/html
     environment:
-      DB_HOST: postgresql
-      DB_USER: root
-      DB_PASSWORD: 123456
+      DATABASE_HOST: postgresql
+      DATABASE_USER: root
+      DATABASE_PASSWORD: 123456
+      REDIS_URL_SIDEKIQ: redis://redis:6379/0
     networks:
       - dev-network
 
