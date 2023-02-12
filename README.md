@@ -1,7 +1,7 @@
 # README
 This is a boilerplate for new rails app using:
 - Rails 7
-- Esbuild for compile asset
+- Esbuild for compile assets
 - Rspec for unit test
 - Rubopcop for check styleguide
 - Dotenv for manage env variable
