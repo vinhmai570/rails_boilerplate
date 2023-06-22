@@ -8,7 +8,7 @@
     "bootstrap": "^5.2.3",
     "bootstrap-icons": "^1.10.2",
     "esbuild": "^0.14.54",
-    "sass": "^1.55.0"
+    "sass": "^1.63.6"
   },
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=assets",
