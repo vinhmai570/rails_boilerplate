@@ -33,7 +33,7 @@ gem 'draper'
 gem 'active_decorator'
 
 # Use Redis adapter to run Action Cable in production
-gem 'sidekiq', '~> 6.5', '>= 6.5.1'
+gem 'sidekiq', '~> 7.1', '>= 6.5.1'
 gem 'hiredis', '~> 0.6.3'
 gem 'redis', '~> 4.7', '>= 4.7.1', require: ['redis', 'redis/connection/hiredis']
 gem 'redis-namespace', '~> 1.8', '>= 1.8.2'
