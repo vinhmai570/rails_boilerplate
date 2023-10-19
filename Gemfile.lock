@@ -169,9 +169,9 @@ GEM
       responders
       warden (~> 1.2.3)
     diff-lcs (1.5.0)
-    dotenv (2.7.6)
-    dotenv-rails (2.7.6)
-      dotenv (= 2.7.6)
+    dotenv (2.8.1)
+    dotenv-rails (2.8.1)
+      dotenv (= 2.8.1)
       railties (>= 3.2)
     draper (4.0.2)
       actionpack (>= 5.0)
