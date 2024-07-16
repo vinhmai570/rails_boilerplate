@@ -311,7 +311,8 @@ GEM
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
-    rexml (3.2.5)
+    rexml (3.3.2)
+      strscan
     rodf (1.2.0)
       builder (>= 3.0)
       rubyzip (>= 1.0)
@@ -384,6 +385,7 @@ GEM
       net-ssh (>= 2.8.0)
     stimulus-rails (1.0.4)
       railties (>= 6.0.0)
+    strscan (3.1.0)
     terser (1.1.13)
       execjs (>= 0.3.0, < 3)
     thor (1.2.1)
