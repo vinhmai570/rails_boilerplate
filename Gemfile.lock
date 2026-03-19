@@ -104,7 +104,7 @@ GEM
     axlsx_styler (1.1.0)
       activesupport (>= 3.1)
       caxlsx (>= 2.0.2)
-    bcrypt (3.1.18)
+    bcrypt (3.1.22)
     bindex (0.8.1)
     bootsnap (1.15.0)
       msgpack (~> 1.2)
