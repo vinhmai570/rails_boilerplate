@@ -132,10 +132,10 @@ GEM
       multi_json
     capistrano-yarn (2.0.2)
       capistrano (~> 3.0)
-    capistrano3-puma (5.2.0)
+    capistrano3-puma (8.0.0)
       capistrano (~> 3.7)
       capistrano-bundler
-      puma (>= 4.0, < 6.0)
+      puma (>= 6.1, < 9.0)
     capybara (3.37.1)
       addressable
       matrix
@@ -240,7 +240,7 @@ GEM
     net-smtp (0.3.3)
       net-protocol
     net-ssh (7.0.1)
-    nio4r (2.5.8)
+    nio4r (2.7.5)
     nokogiri (1.14.2-x86_64-darwin)
       racc (~> 1.4)
     nokogiri (1.14.2-x86_64-linux)
@@ -253,7 +253,7 @@ GEM
       ast (~> 2.4.1)
     pg (1.4.5)
     public_suffix (4.0.7)
-    puma (5.6.5)
+    puma (8.0.2)
       nio4r (~> 2.0)
     racc (1.6.2)
     rack (2.2.6.4)
@@ -449,7 +449,7 @@ DEPENDENCIES
   letter_opener
   pagy
   pg (~> 1.1)
-  puma (~> 5.0)
+  puma (~> 8.0)
   rails (~> 7.0.3)
   rails_best_practices
   ransack
