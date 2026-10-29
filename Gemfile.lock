@@ -155,7 +155,7 @@ GEM
       sexp_processor
     concurrent-ruby (1.2.2)
     connection_pool (2.3.0)
-    crass (1.0.6)
+    crass (1.0.8)
     cssbundling-rails (1.1.2)
       railties (>= 6.0.0)
     date (3.3.3)
